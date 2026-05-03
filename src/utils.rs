@@ -32,6 +32,7 @@ void main() {
 }
 ";
 
+#[expect(dead_code)]
 pub fn get_input_axis() -> Vec2 {
     let mut i = Vec2::ZERO;
     if is_key_down(KeyCode::A) {

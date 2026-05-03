@@ -57,12 +57,17 @@ async fn main() {
             "normal",
             normal_pass.render_target.as_ref().unwrap().texture.clone(),
         );
+        // light_pos += get_input_axis() * get_frame_time() * 64.0;
+
+        light_pos =
+            Vec2::from(mouse_position()) / scale_factor - vec2(SCREEN_WIDTH, SCREEN_HEIGHT) / 2.0;
+
         COMPOSITE_MATERIAL.set_uniform("lightPos", light_pos / vec2(SCREEN_WIDTH, SCREEN_HEIGHT));
         gl_use_material(&COMPOSITE_MATERIAL);
         draw_rectangle(0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT, WHITE);
         gl_use_default_material();
+
         draw_texture(&light, light_pos.x - 8.0, light_pos.y - 8.0, WHITE);
-        light_pos += get_input_axis() * get_frame_time() * 64.0;
 
         set_default_camera();
         clear_background(BLACK);
