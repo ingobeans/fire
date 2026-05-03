@@ -1,6 +1,18 @@
 use macroquad::{miniquad::*, prelude::*};
 use std::sync::LazyLock;
 
+pub fn create_camera(w: f32, h: f32) -> Camera2D {
+    let rt = render_target(w as u32, h as u32);
+    rt.texture.set_filter(FilterMode::Nearest);
+
+    Camera2D {
+        render_target: Some(rt),
+        zoom: Vec2::new(1.0 / w * 2.0, 1.0 / h * 2.0),
+        target: vec2(w, h) / 2.0,
+        ..Default::default()
+    }
+}
+
 pub static COMPOSITE_MATERIAL: LazyLock<Material> = LazyLock::new(|| {
     load_material(
         ShaderSource::Glsl {
