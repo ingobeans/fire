@@ -13,6 +13,7 @@ void main() {
     vec4 normal = texture2D(normal, uv);
     vec4 vector = (2.0*normal)-1.0;
     vec3 lightDir = vec3(normalize(lightPos-uv), 1.0);
+    lightDir.y = -lightDir.y;
 
     float diff = max(dot(vector.xyz, lightDir), 0.0);
     vec4 c = texture2D(regular, uv) * diff * max(1.0-length(lightPos-uv),0.0);
