@@ -6,7 +6,15 @@ use utils::*;
 const SCREEN_WIDTH: f32 = 256.0;
 const SCREEN_HEIGHT: f32 = 144.0;
 
-#[macroquad::main("fire")]
+fn window_conf() -> Conf {
+    Conf {
+        window_title: "fire".to_string(),
+        window_width: SCREEN_WIDTH as i32 * 3,
+        window_height: SCREEN_HEIGHT as i32 * 3,
+        ..Default::default()
+    }
+}
+#[macroquad::main(window_conf)]
 async fn main() {
     let texture = Texture2D::from_file_with_format(include_bytes!("../brick.png"), None);
     let normal = Texture2D::from_file_with_format(include_bytes!("../normal.png"), None);
