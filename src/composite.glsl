@@ -10,11 +10,6 @@ uniform vec2 lightPos;
 
 void main() {
     // gl_FragColor = vec4(lightPos.x,lightPos.y,1.0,1.0);return;
-    if (uv.x > 0.5 ) {
-        gl_FragColor = vec4(0.0,0.0,0.0,1.0);
-        return;
-    }
-
     vec4 normal = texture2D(normal, uv);
     vec4 vector = (2.0*normal)-1.0;
     vec3 lightDir = vec3(normalize(lightPos-uv), 1.0);

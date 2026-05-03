@@ -26,10 +26,11 @@ async fn main() {
 
     let mut light_pos;
 
-    let regular_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-    let normal_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-    let mut composite = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-    composite.target = Vec2::ZERO;
+    let mut regular_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
+    let mut normal_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
+    regular_pass.target = Vec2::ZERO;
+    normal_pass.target = Vec2::ZERO;
+    let composite = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
     loop {
         let (w, h) = screen_size();
         let scale_factor = (w / SCREEN_WIDTH).min(h / SCREEN_HEIGHT).floor();
@@ -59,8 +60,7 @@ async fn main() {
         );
         // light_pos += get_input_axis() * get_frame_time() * 64.0;
 
-        light_pos =
-            Vec2::from(mouse_position()) / scale_factor - vec2(SCREEN_WIDTH, SCREEN_HEIGHT) / 2.0;
+        light_pos = Vec2::from(mouse_position()) / scale_factor;
 
         COMPOSITE_MATERIAL.set_uniform("lightPos", light_pos / vec2(SCREEN_WIDTH, SCREEN_HEIGHT));
         gl_use_material(&COMPOSITE_MATERIAL);
