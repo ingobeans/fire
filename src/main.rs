@@ -24,7 +24,7 @@ async fn main() {
     let normal = Texture2D::from_file_with_format(include_bytes!("../normal.png"), None);
     let light = Texture2D::from_file_with_format(include_bytes!("../light.png"), None);
 
-    let mut light_pos = Vec2::ZERO;
+    let mut light_pos;
 
     let regular_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
     let normal_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
