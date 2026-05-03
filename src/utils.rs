@@ -8,11 +8,8 @@ pub static COMPOSITE_MATERIAL: LazyLock<Material> = LazyLock::new(|| {
             fragment: include_str!("composite.glsl"),
         },
         MaterialParams {
-            uniforms: vec![
-                UniformDesc::new("y", UniformType::Float1),
-                UniformDesc::new("height", UniformType::Float1),
-                UniformDesc::new("maxTowerHeight", UniformType::Float1),
-            ],
+            uniforms: vec![UniformDesc::new("lightPos", UniformType::Float2)],
+            textures: vec!["regular".to_string(), "normal".to_string()],
             ..Default::default()
         },
     )
@@ -34,3 +31,20 @@ void main() {
     uv = texcoord;
 }
 ";
+
+pub fn get_input_axis() -> Vec2 {
+    let mut i = Vec2::ZERO;
+    if is_key_down(KeyCode::A) {
+        i.x -= 1.0;
+    }
+    if is_key_down(KeyCode::D) {
+        i.x += 1.0;
+    }
+    if is_key_down(KeyCode::W) {
+        i.y -= 1.0;
+    }
+    if is_key_down(KeyCode::S) {
+        i.y += 1.0;
+    }
+    i.normalize_or_zero()
+}
