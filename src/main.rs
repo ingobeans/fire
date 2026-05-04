@@ -20,6 +20,7 @@ async fn main() {
     let normal = Texture2D::from_file_with_format(include_bytes!("../normal.png"), None);
     let light = Texture2D::from_file_with_format(include_bytes!("../light.png"), None);
 
+    let mut fullscreen = false;
     let mut light_pos;
 
     let mut regular_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -31,6 +32,15 @@ async fn main() {
     loop {
         let (w, h) = screen_size();
         let scale_factor = (w / SCREEN_WIDTH).min(h / SCREEN_HEIGHT).floor();
+
+        if is_key_pressed(KeyCode::Enter) {
+            fullscreen = !fullscreen;
+            set_fullscreen(fullscreen);
+            if !fullscreen {
+                // reset to default screen size
+                request_new_screen_size(SCREEN_WIDTH * 3.0, SCREEN_HEIGHT * 3.0);
+            }
+        }
 
         set_camera(&regular_pass);
         for i in 0..4 {
