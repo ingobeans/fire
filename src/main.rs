@@ -24,8 +24,9 @@ async fn main() {
 
     let mut regular_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
     let mut normal_pass = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-    regular_pass.target = Vec2::ZERO;
-    normal_pass.target = Vec2::ZERO;
+    let target = vec2(2.0 * 16.0, 2.0 * 16.0);
+    regular_pass.target = target;
+    normal_pass.target = target;
     let composite = create_camera(SCREEN_WIDTH, SCREEN_HEIGHT);
     loop {
         let (w, h) = screen_size();
