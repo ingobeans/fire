@@ -4,12 +4,11 @@ precision highp float;
 
 uniform sampler2D normal;
 uniform sampler2D regular;
+
 varying vec2 uv;
-uniform vec4 _Time;
 uniform vec2 lightPos;
 
 void main() {
-    // gl_FragColor = vec4(lightPos.x,lightPos.y,1.0,1.0);return;
     vec4 normal = texture2D(normal, uv);
     vec4 vector = (2.0*normal)-1.0;
     vec3 lightDir = vec3(normalize(lightPos-uv), 1.0);
