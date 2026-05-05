@@ -3,7 +3,6 @@ use macroquad::{miniquad::window::screen_size, prelude::*};
 mod assets;
 mod graphics;
 mod utils;
-use assets::*;
 use graphics::*;
 use utils::*;
 
