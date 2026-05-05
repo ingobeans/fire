@@ -1,6 +1,6 @@
 use macroquad::prelude::*;
 
-use crate::utils::*;
+use crate::{assets::ASSETS, utils::*};
 
 /// Handles rendering of textures that are lit with normal maps
 pub struct RenderingEngine {
@@ -24,6 +24,12 @@ impl RenderingEngine {
             normal_camera,
             composite_camera,
         }
+    }
+    pub fn draw_tile(&self, x: f32, y: f32, tile_x: f32, tile_y: f32) {
+        self.use_texture_camera();
+        ASSETS.tileset.texture.draw_tile(x, y, tile_x, tile_y, None);
+        self.use_normal_camera();
+        ASSETS.tileset.normal.draw_tile(x, y, tile_x, tile_y, None);
     }
     pub fn use_texture_camera(&self) {
         set_camera(&self.texture_camera);

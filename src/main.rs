@@ -1,7 +1,9 @@
 use macroquad::{miniquad::window::screen_size, prelude::*};
 
+mod assets;
 mod graphics;
 mod utils;
+use assets::*;
 use graphics::*;
 use utils::*;
 
@@ -15,9 +17,6 @@ fn window_conf() -> Conf {
 }
 #[macroquad::main(window_conf)]
 async fn main() {
-    let texture = Texture2D::from_file_with_format(include_bytes!("../brick.png"), None);
-    let normal = Texture2D::from_file_with_format(include_bytes!("../normal.png"), None);
-
     let mut fullscreen = false;
 
     let mut renderer = RenderingEngine::new();
@@ -35,16 +34,9 @@ async fn main() {
             }
         }
 
-        renderer.use_texture_camera();
         for i in 0..4 {
             for j in 0..4 {
-                draw_texture(&texture, 16.0 * i as f32, 16.0 * j as f32, WHITE);
-            }
-        }
-        renderer.use_normal_camera();
-        for i in 0..4 {
-            for j in 0..4 {
-                draw_texture(&normal, 16.0 * i as f32, 16.0 * j as f32, WHITE);
+                renderer.draw_tile(16.0 * i as f32, 16.0 * j as f32, 0.0, 0.0);
             }
         }
 
@@ -52,6 +44,7 @@ async fn main() {
 
         set_default_camera();
         clear_background(BLACK);
+
         let size = vec2(SCREEN_WIDTH, SCREEN_HEIGHT) * scale_factor;
         draw_texture_ex(
             &renderer.get_rendered_texture(),
