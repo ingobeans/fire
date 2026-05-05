@@ -3,7 +3,7 @@
 precision highp float;
 
 uniform sampler2D normal;
-uniform sampler2D regular;
+uniform sampler2D texture;
 
 varying vec2 uv;
 uniform vec2 lightPos;
@@ -15,6 +15,6 @@ void main() {
     lightDir.y = -lightDir.y;
 
     float diff = max(dot(vector.xyz, lightDir), 0.0);
-    vec4 c = texture2D(regular, uv) * diff * max(1.0-length(lightPos-uv),0.0);
+    vec4 c = texture2D(texture, uv) * diff * max(1.0-length(lightPos-uv),0.0);
     gl_FragColor = c;
 }

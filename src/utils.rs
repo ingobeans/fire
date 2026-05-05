@@ -1,6 +1,9 @@
 use macroquad::{miniquad::*, prelude::*};
 use std::sync::LazyLock;
 
+pub const SCREEN_WIDTH: f32 = 256.0;
+pub const SCREEN_HEIGHT: f32 = 144.0;
+
 pub fn create_camera(w: f32, h: f32) -> Camera2D {
     let rt = render_target(w as u32, h as u32);
     rt.texture.set_filter(FilterMode::Nearest);
@@ -21,7 +24,7 @@ pub static COMPOSITE_MATERIAL: LazyLock<Material> = LazyLock::new(|| {
         },
         MaterialParams {
             uniforms: vec![UniformDesc::new("lightPos", UniformType::Float2)],
-            textures: vec!["regular".to_string(), "normal".to_string()],
+            textures: vec!["texture".to_string(), "normal".to_string()],
             ..Default::default()
         },
     )
